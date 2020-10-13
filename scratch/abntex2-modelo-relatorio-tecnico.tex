@@ -1,0 +1,422 @@
+\documentclass[
+	% -- opções da classe memoir --
+	12pt,				% tamanho da fonte
+	%openright,			% capítulos começam em pág ímpar (insere página vazia caso preciso)
+	oneside,   	        % para impressão em verso e anverso use twoside. Oposto a oneside
+	a4paper,			% tamanho do papel. 
+	% -- opções da classe abntex2 --
+	%chapter=TITLE,		% títulos de capítulos convertidos em letras maiúsculas
+	%section=TITLE,		% títulos de seções convertidos em letras maiúsculas
+	%subsection=TITLE,	% títulos de subseções convertidos em letras maiúsculas
+	%subsubsection=TITLE,% títulos de subsubseções convertidos em letras maiúsculas
+	% -- opções do pacote babel --
+	english,			% idioma adicional para hifenização
+	french,				% idioma adicional para hifenização
+	spanish,			% idioma adicional para hifenização
+	brazil,				% o último idioma é o principal do documento
+	]{pacotes/abntex2}
+
+
+% ---
+% PACOTES
+% ---
+
+% ---
+% Pacotes fundamentais 
+% ---
+\usepackage[section]{placeins}
+\usepackage{algorithm}          % Escrever algoritmos
+\usepackage{algpseudocode}      % Escrever algoritmos
+\usepackage{cmap}				% Mapear caracteres especiais no PDF
+\usepackage{lmodern}			% Usa a fonte Latin Modern
+\usepackage[T1]{fontenc}		% Selecao de codigos de fonte.
+\usepackage[utf8x]{inputenc}		% Codificacao do documento (conversão automática dos acentos)
+\usepackage{indentfirst}		% Indenta o primeiro parágrafo de cada seção.
+\usepackage{color}				% Controle das cores
+\usepackage{graphicx}			% Inclusão de gráficos
+% ---
+\usepackage{amsmath} % for '\text' macro
+\usepackage{cleveref} % optional, for '\cref' macro
+% ---
+% Pacotes adicionais, usados no anexo do modelo de folha de identificação
+% ---
+\usepackage{multicol}
+\usepackage{multirow}
+% ---
+	
+% ---
+% Pacotes adicionais, usados apenas no âmbito do Modelo Canônico do abnteX2
+% ---
+\usepackage{lipsum}				% para geração de dummy text
+% ---
+
+% ---
+% Pacotes de citações
+% ---
+\usepackage[brazilian,hyperpageref]{backref}	 % Paginas com as citações na bibl
+\usepackage[alf]{pacotes/abntex2cite}	% Citações padrão ABNT
+\usepackage{comment}
+\usepackage{url}
+% --- 
+% CONFIGURAÇÕES DE PACOTES
+% --- 
+
+% ---
+% Configurações do pacote backref
+% Usado sem a opção hyperpageref de backref
+\renewcommand{\backrefpagesname}{Citado na(s) página(s):~}
+% Texto padrão antes do número das páginas
+\renewcommand{\backref}{}
+% Define os textos da citação
+\renewcommand*{\backrefalt}[4]{
+	\ifcase #1 %
+		Nenhuma citação no texto.%
+	\or
+		Citado na página #2.%
+	\else
+		Citado #1 vezes nas páginas #2.%
+	\fi}%
+% ---
+
+% Source Code 
+\usepackage{color}
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\usepackage{listings}
+\lstset{ 
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  frame=single,	                   % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=Python,                 % the language of the code
+  morekeywords={*,...},            % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mymauve},     % string literal style
+  tabsize=2,	                   % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+% ---
+% Informações de dados para CAPA e FOLHA DE ROSTO
+% ---
+\usepackage{microtype}  
+\titulo{Treino Jedi}
+\autor{Darth Vader \ Palpatine}
+\local{Campo Mourão}
+\data{Julho / 2019}
+\instituicao{%
+  Universidade Tecnológica Federal do Paraná -- UTFPR
+  \par
+  Departamento Acadêmico de Computação -- DACOM
+  \par
+  Bacharelado em Ciência da Computação -- BCC
+}
+\tipotrabalho{Relatório técnico}
+% O preambulo deve conter o tipo do trabalho, o objetivo, 
+% o nome da instituição e a área de concentração 
+\preambulo{Relatório elaborado na disciplina de Interfaces Não Convencionais
+do curso de Bacharelado em Ciência da
+Computação, ofertada pelo Departamento
+Acadêmico de Computação, do Câmpus
+Campo Mourão da Universidade
+Tecnológica Federal do Paraná.}
+% ---
+
+% ---
+% Configurações de aparência do PDF final
+
+% alterando o aspecto da cor azul
+\definecolor{blue}{RGB}{41,5,195}
+
+% informações do PDF
+\makeatletter
+\hypersetup{
+     	%pagebackref=true,
+		pdftitle={\@title}, 
+		pdfauthor={\@author},
+    	pdfsubject={\imprimirpreambulo},
+	    pdfcreator={LaTeX with abnTeX2},
+		pdfkeywords={abnt}{latex}{abntex}{abntex2}{relatório técnico}, 
+		colorlinks=true,       		% false: boxed links; true: colored links
+    	linkcolor=blue,          	% color of internal links
+    	citecolor=blue,        		% color of links to bibliography
+    	filecolor=magenta,      		% color of file links
+		urlcolor=blue,
+		bookmarksdepth=4
+}
+\makeatother
+% --- 
+
+% --- 
+% Espaçamentos entre linhas e parágrafos 
+% --- 
+
+% O tamanho do parágrafo é dado por:
+\setlength{\parindent}{1.3cm}
+
+% Controle do espaçamento entre um parágrafo e outro:
+\setlength{\parskip}{0.2cm}  % tente também \onelineskip
+
+% ---
+% compila o indice
+% ---
+\makeindex
+% ---
+
+% Omite a numeração de capítulos
+\renewcommand*\thesection{\arabic{section}}
+
+
+
+% ----
+% Início do documento
+% ----
+\begin{document}
+
+% Retira espaço extra obsoleto entre as frases.
+\frenchspacing 
+
+% ----------------------------------------------------------
+% ELEMENTOS PRÉ-TEXTUAIS
+% ----------------------------------------------------------
+% \pretextual
+
+% ---
+% Capa
+% ---
+%\imprimircapa
+% ---
+
+% ---
+% Folha de rosto
+% (o * indica que haverá a ficha bibliográfica)
+% ---
+\imprimirfolhaderosto
+% ---
+
+
+% ---
+% inserir lista de ilustrações
+% ---
+%\pdfbookmark[0]{\listfigurename}{lof}
+%\listoffigures*
+%\cleardoublepage
+% ---
+
+% ---
+% inserir lista de tabelas
+% ---
+%\pdfbookmark[0]{\listtablename}{lot}
+%\listoftables*
+%\cleardoublepage
+% ---
+
+% ---
+% inserir lista de abreviaturas e siglas
+% ---
+%\begin{siglas}
+%  \item[IP] Internet Protocol
+%  \item[TCP] Transmission Control Protocol
+%  \item[UDP] User Datagram Protocol
+%\end{siglas}
+% ---
+
+% ---
+% inserir o sumario
+% ---
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\cleardoublepage
+% ---
+
+% ----------------------------------------------------------
+% ELEMENTOS TEXTUAIS
+% ----------------------------------------------------------
+\textual
+
+\makeatletter
+\renewcommand{\chapter}{\@gobbletwo}
+\makeatother
+\section{Instrução}
+Juntamente com o projeto da disciplina, os alunos devem entregar um relatório técnico
+contendo uma breve descrição da tecnologia empregada, do sistema implementado e
+questões de usabilidade que foram levadas em consideração
+Esse relatório deve conter os elementos de acordo com as normas de formatação do modelo
+canônico da ABNT.
+Itens que serão avaliados:
+\section{Introdução} 
+
+descrever o objetivo do relatório – apresentar o processo de desenvolvimento e
+a tecnologia empregados para a implementação de uma aplicação ....., que utiliza interface ....,
+bem como as questões de usabilidade que foram endereçadas no desenvolvimento.
+
+From the customer support dialog boxes you find on e-commerce websites to virtual assistants like Siri and Alexa, it’s likely that you’ve encountered chatbots frequently in your everyday life. Like its name suggests, a chatbot is a piece of software designed to conduct a conversation or dialog. They can be found in a wide range of industries to serve a variety of purposes, ranging from providing customer support to aiding in therapy to simply being a source of fun and entertainment. Let’s take a closer look at how chatbots are able to do what they do!
+
+\section{Fundamentação Teórica}
+Fundamentação Teórica – (ou Tecnologia(s) utilizada(s))
+Se julgar pertinente, uma pequena descrição sobre o mecanismo de interação usado
+Funcionamento da interface
+API utilizada (se for o caso)
+Se julgar pertinente, descrever a biblioteca usada, instalação,
+
+
+\subsection{Voice User Interface}
+Uma Voice User Interface (VUI) permite a comunicação entre humanos e computadores, utilizando speech recognition para entender os comandos falados e text to voice para responder as perguntas.
+Voices User Interfaces podem ser utilizadas em automóveis, casas automatizadas, sistemas operacionais e aplicações.
+
+
+First, chatbots can be categorized according to how they generate the response that gets returned to the user. The simplest approach is the rule-based model, where chatbot responses are entirely predefined and returned to the user according to a series of rules. This includes decision trees that have a clear set of possible outputs defined for each step in the dialog. 
+Next, there is the retrieval-based model, where chatbot responses are pulled from an existing corpus of dialogs. Machine learning models, such as statistical NLP models and sometimes supervised neural networks, are used to interpret the user input and determine the most fitting response to retrieve. Like rule-based models, retrieval-based models rely on predefined responses, but they have the additional ability to self-learn and improve their selection of response over time.
+
+Finally, generative chatbots are capable of formulating their own original responses based on user input, rather than relying on existing text. This involves the use of deep learning, such as LSTM-based seq2seq models, to train the chatbots to be able to make decisions about what is an appropriate response to return.
+
+While generative models are very flexible and powerful in that they are not confined to a predefined set of rules or responses, they are also significantly more challenging to implement. Training these chatbots require an abundance of data, and it is often unclear what gets used for their decision-making, making them more prone to grammatical errors and nonsensical replies. By contrast, retrieval-based models can guarantee the quality of the responses since they are predefined, but these chatbots are in turn restricted to language that exists within the training data.
+
+Thus, chatbots often use a combination of the different models in order to produce optimal results. For example, a customer support chatbot may use generative models for creating open-ended small talk with the user, but then are able to retrieve professional, predefined responses for answering the user’s inquiries regarding the business or product.
+
+Rule-based and retrieval-based architectures cannot effectively create open-domain chatbot systems, while generative open-domain systems are possible as a form of artificial intelligence. A closed-domain rule-based system would be a simple dialog tree, a closed-domain retrieval-based system would be a form of machine learning, and a closed-domain generative system would be considered a smart machine.
+
+Chatbots can also be categorized based on the range of conversation topics they are able to cover. Closed domain chatbots, or dialog agents, are restricted to providing responses with a particular focus, such as booking a hotel room. Because they are designed with a specific goal in mind, these chatbots are often very efficient and have great success in accomplishing what they are intended to accomplish. The user-perceived quality is also high, because users don’t expect the chatbots to provide responses outside of the pre-established domain.
+%imagem de chatbots
+%domain of conversation
+On the other hand, open domain chatbots, or conversational agents, are capable of exploring any range of conversation topics, much like how a human-to-human interaction would be. Many of these “companion bots” have filled the roles of a friend or therapist, allowing the user to connect with them on an emotional level. While they have great potential, open domain chatbots are challenging to implement and evaluate.
+
+It is worthwhile to note that the term “chatbot” is sometimes reserved only for open domain conversational agents, but for the purpose of this course, we include closed domain dialog agents as well.
+%another way
+
+Another way chatbots can be categorized is by which side – the user or bot – is able to take initiative on the conversation. Looking back at our previous example on hotel search, notice how the user is free to provide their request in their own words, and the chatbot is able to identify and piece together the relevant keywords to answer the query. This is an example of a mixed-initiative system, representative of a normal human-to-human conversation where all participants have the chance to take initiative.
+
+By contrast, a system-initiative system is one where the chatbot controls the conversation and explicitly asks for each piece of information, such as the date and location for the hotel booking. While this system is more straight-forward to implement because user response can be anticipated, it lacks the flexibility and naturalness that characterize a normal human dialog.
+
+\subsection{API Google e Watson}
+Watson é um sistema para o processamento avançado, recuperação de informação, representação de conhecimento, raciocínio automatizado e tecnologias de aprendizado de máquinas.
+Com o Google Speech-to-Text, os desenvolvedores podem converter áudio em texto aplicando modelos de rede neural avançados em uma API fácil de usar. A API reconhece mais de 120 idiomas e variantes para atender à sua base de usuários global. Ative o comando e o controle de voz, transcreva áudio de call centers e muito mais. Além disso, essa API processa streaming em tempo real ou áudio pré-gravado usando a tecnologia de machine learning do Google. 
+\section{Tecnologias e bibliotecas}
+Beautiful Soup is a library that makes it easy to scrape information from web pages. It sits atop an HTML or XML parser, providing Pythonic idioms for iterating, searching, and modifying the parse tree.
+
+\section{Descrição da Aplicação}
+Descrever o que faz a aplicação – Se for necessário, inserir subseções como: instalação,
+configuração, restrições de hardware e software, ou outras.
+Mostrar um outro aspecto importante da implementação. Se for necessário, colocar
+um algoritmo em alto nível no texto e o código em algum anexo.
+Pode inserir imagens, screenshots, arquitetura da aplicação, etc.
+\subsection{Descrição}
+Voice Interface de saúde.
+To interact with the human user, chatbots must be able to:
+
+    parse the user input
+    interpret what it means
+    provide an appropriate response or output
+
+For example, a user query could be, “Show me hotels in Los Angeles for tomorrow.”
+
+A good chatbot will be able to identify the intent and entities of the query. The intent is the purpose or category of the user query, such as to retrieve a list of hotels. Entities are extra information that describes the user’s intent. In this case, the entities are “Los Angeles” and “tomorrow.” With these pieces of information, chatbots should be able to respond to the user with a list of available hotels for the correct location and date. 
+\subsection{Instalação e especificações técnicas}
+Criar um virtual env
+\subsection{Comandos}
+Tempo
+Notícias
+Música
+\subsection{Fluxo de Conversação}
+Desenhar no modelador
+\subsection{Arquitetura da Aplicação}
+Desenhar no drawio
+
+%imagem da arquitetura
+\section{Materiais e Métodos}
+Descrever o processo da implementação, testes e resultados obtidos. Incluir uma
+subseção:
+
+Voz gravada no celular
+API IBM Watson
+Linguagem Python
+\subsection{Implementação}
+Conta na IBM
+Chave da aplicação
+Comandos e conversação
+\subsection{Questões de Usabilidade/Testes}
+Descrever estratégias usadas pelo grupo visando acessibilidade
+
+Facilitar a vida do usuário que tem alguma limitação com texto.
+
+In this paper, usability testing has been taken into account for evaluation of NOME DO SISTEMA system. Usability testing
+refers to an evaluation process to measure the target audience usability criteria [4]. A product or service to be usable
+it should have some basic criteria. These are usefulness, efficiency, effectiveness, learnability, satisfaction,
+accessibility. Usefulness concerns the degree to achieve user goals about a design, product or service. Efficiency
+measures the user’s goal how much accurately it accomplished and complete within the time limit. Effectiveness
+refers to the product behaves in the way that users expect. Learnability measure the user’s ability to learn the system.
+Satisfaction refers to the user’s opinion about the product. Accessibility measure what makes products usable by
+people who have disability.
+
+%etica
+
+Imagine you are shopping online and come across a live chat feature on a website. You decide to begin a chat to get some advice on finding the right product to purchase. The representative on the other end appears to be eager and helpful, prompting you for more information. You feel a sense of trust and end up sharing some details about your lifestyle and background. The representative helps to find the product that best fits your needs and all seems well - or is it?
+
+What if you learn that the representative you were chatting with was not a human, but a bot all along? And what if all the personal information you’ve shared with it was saved beyond the session of your chat? This data, now owned by the company that runs the business, can then be used to send you unsolicited advertisements and target you as a consumer… that wouldn’t seem too fair!
+
+This scenario is just one example of how ethical issues can arise when it comes to chatbots. In the rest of this article, we will further expand on this topic and see how to address these ethical concerns.
+%user transparency
+From the user’s perspective, a big ethical consideration when it comes to technology is transparency. In other words, is the user aware of all aspects involving the chatbot and the consequences of interacting with one? As seen previously, a common concern is the privacy and protection of user data. Depending on what regulations are put in place, any information that the users share with the bot during their conversation could potentially be collected, used, or sold without their consent – not to mention the company or organization that owns the bot would then amass an increasing amount of information over time, creating a vast power imbalance. Thus, it is key to be open and clear about data usage, ownership, and protection. One way to maximize transparency includes implementing a data regulation system like the European Union’s GDPR, which gives individuals more control over their personal data. 
+To take it a step further, full transparency may also involve explicitly communicating to the user that they are indeed chatting with a bot. As chatbots become more advanced and realistic, it might not always be immediately apparent whether the user is chatting with a bot or another human! A prime example is the Google Duplex system, which is able to carry out convincingly natural, human-like phone conversations for specific tasks like booking appointments. While adding this aspect of realness to the bot does help contribute to the ease and flow of the conversation, it is still important to ensure that the user is fully aware of the situation and does not feel deceived, as this can lead to distrust.
+% chatbot persona
+There are also ethical issues to consider on the side of the chatbot. With respect to the representation of the bot, one of the biggest controversies surrounds the assignment of gender. Historically, females have been expected to fill assistant-type roles in the workplace while males take on leadership positions. It is not unrelated that chatbots have been disproportionately given female names or voices, such as Apple’s Siri and Amazon’s Alexa, which can reinforce gender roles and perpetuate the “subservient female” stereotype. As chatbot developers, we need to be careful to avoid any gender bias during the design of the bot. 
+Additionally, we need to take caution when training the bot to ensure that it behaves appropriately. If it is not properly trained, the chatbot could be at risk of displaying racism, sexism, or use of abusive language. This is exactly what happened to Microsoft’s Tay, a bot the company created for use on Twitter that generated its responses based on how users interacted with it. When various users began posting offensive tweets towards the bot, Tay reciprocated by emulating that same language in its replies. This type of behavior can be prevented with more effective training of the bot, such as using supervised learning to ensure the quality of training data and better predict the outputted responses.
+% art of communicattion
+As we can see, there is more to communication than simply providing a response. In society, we consider certain behaviors more morally or socially acceptable than others. In the case of handling user abuse, is it enough for the chatbot to simply not reciprocate the negative language? Passively accepting the abuse may actually encourage user behavior and downplay the significance of the situation. For example, feminized chatbots are often sexually harassed without any apparent repercussions. As chatbot developers, we can design bots that actively tackle harassment, perhaps using humor and wit to turn the situation around. 
+Similarly, some users reach out to chatbots as a source of company and comfort when they are feeling lonely or depressed. In these situations, users may grow emotionally attached, and the chatbot should be particularly considerate of their feelings. For instance, how can a chatbot demonstrate compassion and empathy towards the user? If the user is expressing suicidal thoughts, would the bot be able to offer help? These are all ethical questions that should be considered. Some chatbots, like Woebot, are specially trained to be able to help users with their mental health.
+
+
+\section{Conclusão}
+Chatbots have come a long way. What started out as computers that attempted to mimic human conversation has grown into elaborate systems that are able to carry out a multitude of functions and goals. But this great power and potential doesn’t come without a price. As chatbots continue to evolve, there are also growing ethical concerns that arise. We will discuss this in more detail in the next article!
+%future
+Finally, as chatbots become an ever-growing part of the human world, it is important to consider how they will affect the future and life as we know it. Already, chatbots are increasingly filling roles that were once occupied by humans. With chatbot technology rapidly improving, more and more jobs will likely become automated, displacing a significant number of workers. While this trend may ultimately be inevitable, we can still be mindful of its consequences and take action to allow for a smoother transition. 
+Nevertheless, there is no denying that chatbots bring many positive elements into our lives. They hold great potential, and it is an exciting journey to be a part of!
+\section{Referências}
+
+
+
+\appendix
+\chapter{Apêndice A}
+
+
+
+
+
+
+\newpage
+
+
+% ----------------------------------------------------------
+% ELEMENTOS PÓS-TEXTUAIS
+% ----------------------------------------------------------
+\postextual
+% ----------------------------------------------------------
+% Referências bibliográficas
+% ----------------------------------------------------------
+\renewcommand{\bibsection}{%
+\section{\bibname}
+\bibmark
+%\ifnobibintoc\else
+%\phantomsection
+%\addcontentsline{toc}{section}{\bibname}
+%\fi
+\prebibhook}
+
+\bibliography{abntex2-modelo-references}
+\end{document}
